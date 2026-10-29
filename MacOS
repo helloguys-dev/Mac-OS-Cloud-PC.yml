@@ -1,0 +1,21 @@
+name: Setup macOS Cloud PC
+
+on:
+  workflow_dispatch:
+
+jobs:
+  macos-cloud-pc:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure macOS Environment
+        run: |
+          echo "Configuring macOS Cloud PC..."
+          system_profiler SPSoftwareDataType
+
+      - name: Setup VNC / RDP Access
+        run: |
+          # Habilitar acceso remoto o iniciar servicio VNC/RDP según la configuración
+          sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate -configure -access -on -users admin -privs -all -restart -agent -privs -all
